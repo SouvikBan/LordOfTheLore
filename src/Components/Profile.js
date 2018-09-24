@@ -13,9 +13,10 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import { mainListItems } from './listItems'
-import {Route} from 'react-router-dom' 
+import {Route,Switch} from 'react-router-dom' 
 import GenreList from './GenreList'
 import Leaderboard from './Leaderboard'
+import UserDetail from './UserDetail'
 
 const drawerWidth = 240;
 
@@ -101,8 +102,8 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-
+    const { classes,match } = this.props;
+    console.log(`${match.path}`);
     return (
       <React.Fragment>
         <CssBaseline />
@@ -124,7 +125,7 @@ class Dashboard extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography variant="title" color="inherit" noWrap className={classes.title}>
-                Dashboard
+                Lord Of The Lore - My Quiz App
               </Typography>
             </Toolbar>
           </AppBar>
@@ -146,9 +147,12 @@ class Dashboard extends React.Component {
           </Drawer>
           <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-            <Route exact path="/Genres" component={GenreList}/>
-            <Route exact path="/Leaderboards" component={Leaderboard}/>
-          </main>
+          <Switch>
+            <Route  exact path="/Profile" component={UserDetail}/>
+            <Route  exact path="/Profile/Leaderboards" component={Leaderboard}/>
+            <Route  exact path="/Profile/Genres" component={GenreList}/>
+           </Switch> 
+        </main>
         </div>
       </React.Fragment>
     );

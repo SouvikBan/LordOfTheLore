@@ -70,7 +70,7 @@ function SignIn(props) {
                 autoComplete="current-password"
               />
             </FormControl>
-            <Link to="/MainPage">
+            <Link to="/Profile">
             <Button
               type="submit"
               fullWidth

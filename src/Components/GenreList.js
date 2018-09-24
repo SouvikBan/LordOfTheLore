@@ -4,7 +4,7 @@ class GenreList extends Component {
   render() {
     return (
       <div className="GenreList">
-        Hello World
+        Genres
       </div>
     );
   }
