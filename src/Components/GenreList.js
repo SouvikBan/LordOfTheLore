@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {fetchAllGenres} from '../Actions/genres.action'
+import Papersheet from '../Commons/Papersheet'
 
 class GenreList extends Component {
     componentDidMount(){
         this.props.fetchGenres()
     }
-
+    
     render() {
-        console.log(this.props.genres)
+        const {genres} = this.props
         return (
             <div className="GenreList">
-                Genres
+                {genres.map( genre => 
+                        <div className="Genres" key={genre.ID}>
+                            <Papersheet text={{content:genre.gname}} />
+                        </div>
+                    )
+                }  
             </div>
         );
     }

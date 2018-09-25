@@ -1,5 +1,7 @@
 export default function(
-    state = { allGenres:[]}, action) {
+    state = { 
+    allGenres:[]
+    }, action) {
     switch(action.type) {
         case 'FETCH_ALL_GENRES':
             return { allGenres:action.payload };
