@@ -17,6 +17,8 @@ import {Route,Switch} from 'react-router-dom'
 import GenreList from './GenreList'
 import Leaderboard from './Leaderboard'
 import UserDetail from './UserDetail'
+import QuizList from './QuizList'
+import QuestionList from './QuestionList'
 
 const drawerWidth = 240;
 
@@ -151,6 +153,8 @@ class Dashboard extends React.Component {
             <Route  exact path="/Profile" component={UserDetail}/>
             <Route  exact path="/Profile/Leaderboards" component={Leaderboard}/>
             <Route  exact path="/Profile/Genres" component={GenreList}/>
+            <Route  exact path="/Profile/Genres/:genrename" component={QuizList} />
+            <Route  exact path="/Profile/Genres/:genrename/:quizname" component={QuestionList} />
            </Switch> 
         </main>
         </div>

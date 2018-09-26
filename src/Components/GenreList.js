@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {fetchAllGenres} from '../Actions/genres.action'
+import {fetchQuizzes} from '../Actions/quizzes.action'
 import Papersheet from '../Commons/Papersheet'
+import {Link} from 'react-router-dom'
 
 class GenreList extends Component {
     componentDidMount(){
@@ -9,12 +11,12 @@ class GenreList extends Component {
     }
     
     render() {
-        const {genres} = this.props
+        const {genres,match} = this.props
         return (
             <div className="GenreList">
                 {genres.map( genre => 
                         <div className="Genres" key={genre.ID}>
-                            <Papersheet text={{content:genre.gname}} />
+                            <Link to={`${match.url}/${genre.gname}`} onClick={()=>this.props.submitGenre(genre)}><Papersheet text={{content:genre.gname}} /></Link>
                         </div>
                     )
                 }  
@@ -31,7 +33,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch =>{
     return {
-        fetchGenres:() => dispatch(fetchAllGenres())
+        fetchGenres:() => dispatch(fetchAllGenres()),
+        submitGenre:payload => dispatch(fetchQuizzes(payload))
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(GenreList)

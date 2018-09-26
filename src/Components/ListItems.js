@@ -23,7 +23,7 @@ export const mainListItems = (
       <ListItemIcon>
         <SendIcon />
       </ListItemIcon>
-      <ListItemText primary="Start The Quiz" />
+      <ListItemText primary="Select Genre" />
     </ListItem>
     </NavLink>
     <NavLink to="/Profile/Leaderboards">
