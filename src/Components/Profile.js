@@ -104,8 +104,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes,match } = this.props;
-    console.log(`${match.path}`);
+    const { classes} = this.props
     return (
       <React.Fragment>
         <CssBaseline />

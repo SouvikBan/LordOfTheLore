@@ -16,7 +16,9 @@ class GenreList extends Component {
             <div className="GenreList">
                 {genres.map( genre => 
                         <div className="Genres" key={genre.ID}>
-                            <Link to={`${match.url}/${genre.gname}`} onClick={()=>this.props.submitGenre(genre)}><Papersheet text={{content:genre.gname}} /></Link>
+                            <Link to={`${match.url}/${genre.gname}`} onClick={()=>this.props.submitGenre(genre)}>
+                                <Papersheet text={{content:genre.gname}} />
+                            </Link>
                         </div>
                     )
                 }  
