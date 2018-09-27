@@ -4,13 +4,45 @@ import ButtonStyle from '../Commons/ButtonStyle'
 import axios from 'axios'
 import {showscore} from '../Actions/quizzes.action'
 import { Redirect } from 'react-router-dom'
+import {addquestion,deletequestion} from '../Actions/questions.action'
 
 class QuestionList extends Component {
-    state = {
-        redirect:false,
-        questions:[]
+    constructor(){
+        super()
+        this.state = {
+            redirect:false,
+            questions:[],
+            form:false,
+            question:"",
+            qtype:"",
+            options:"",
+            answer:""
+        }
+            this.handleSubmit = this.handleSubmit.bind(this)
+            this.handleNameChange=this.handleNameChange.bind(this)
+            this.handleTypeChange=this.handleTypeChange.bind(this)
+            this.handleOptionsChange=this.handleOptionsChange.bind(this)
+            this.handleAnswerChange=this.handleAnswerChange.bind(this)
     }
 
+    handleNameChange(event){
+        this.setState({question:event.target.value})
+    }
+    handleTypeChange(event){
+        this.setState({qtype:event.target.value})
+    }
+    handleOptionsChange(event){
+        this.setState({options:event.target.value})
+    }
+    handleAnswerChange(event){
+        this.setState({answer:event.target.value})
+    }
+    handleSubmit(event){
+        event.preventDefault()
+        var id=this.props.match.params.id
+        this.props.AddQuestion({"QuizID":id,"qtype":this.state.qtype,"question":this.state.question,"options":this.state.options,"answer":this.state.answer},this.props.match.params.id)
+        console.log({"QuizID":id,"qtype":this.state.qtype,"question":this.state.question,"options":this.state.options,"answer":this.state.answer})
+    }
     calcScore(){
         var score=0
         for(var each of this.state.questions){
@@ -71,7 +103,7 @@ class QuestionList extends Component {
     Createbuttonrender(bool){
         if(bool){
             return(
-                <div><ButtonStyle text={{content:"Create Question",color:"secondary"}}/></div>
+                <div onClick={()=>this.setState({form:true})}><ButtonStyle text={{content:"Create Question",color:"secondary"}}/></div>
             )
         }
         else
@@ -121,6 +153,29 @@ class QuestionList extends Component {
         }
     })
 }
+renderform(){
+    if(this.state.form){
+    return(<form onSubmit={this.handleSubmit}>
+    <label htmlFor="question">Enter question</label>
+    <input id="question" name="question" type="text"  value={this.state.question} onChange={this.handleNameChange}/>
+    <br/>
+    <label htmlFor="questiontype">Enter question type</label>
+    <input id="questiontype" name="questiontype" type="text"  value={this.state.qtype} onChange={this.handleTypeChange}/>
+    <br/>
+    <label htmlFor="options">Enter options</label>
+    <input id="options" name="options" type="text"  value={this.state.options} onChange={this.handleOptionsChange}/>
+    <br/>
+    <label htmlFor="answer">Enter answer</label>
+    <input id="answer" name="answer" type="text"  value={this.state.answer} onChange={this.handleAnswerChange}/>
+    <br/>
+    <button>Create</button>
+    </form>)
+    }
+    else
+    {
+        return(<div></div>)
+    }
+}
     
     render() {
         const {match} =this.props
@@ -140,6 +195,7 @@ class QuestionList extends Component {
         return (
             <div className="QuestionList">
             {this.Createbuttonrender(this.props.Sessions.admin)}
+            {this.renderform(this.state.form)}
             {questions.map( question => 
                     <div className="Questions" key={question.ID}>
                         <h4>{question.ID}.{question.question}</h4>
@@ -164,7 +220,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch =>{
     return{
-        ShowScore : payload => dispatch(showscore(payload))
+        ShowScore : payload => dispatch(showscore(payload)),
+        AddQuestion : payload => dispatch(addquestion(payload)),
+        DeleteQuestion : payload => dispatch(deletequestion(payload))
     }
 }   
 

@@ -12,3 +12,24 @@ export function fetchquestions(objectID){
         });
     };
 }
+
+export function addquestion(data,id){
+
+    const request = API.post("/questions/",data)
+
+    return dispatch => {
+        request.then(({data}) => {
+            dispatch(fetchquestions(id))
+        });
+    };
+}
+
+export function deletequestion(ID,id){
+    const request = API.delete("/questions/"+ID)
+    return dispatch => {
+        request.then(({data}) =>{
+            dispatch(fetchquestions(id))
+        });
+    }
+
+}
