@@ -8,6 +8,6 @@ export const ChangeSessionData = user => {
 export const DeleteSessionData = _ =>{
     return {
         type:"USER_LOGGED_OUT",
-        payload: null
+        payload: []
     }
 }

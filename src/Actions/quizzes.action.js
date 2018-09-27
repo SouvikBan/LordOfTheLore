@@ -4,3 +4,11 @@ export const fetchQuizzes = genre => {
         payload: genre.Quizzes
     }
 }
+
+export const showscore = score => {
+    return {
+        type:"SHOW_SCORE",
+        payload: score
+    }
+}
+

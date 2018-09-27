@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { getuserdetails,deleteuser} from '../Actions/users.action'
+import ButtonStyle from '../Commons/ButtonStyle'
 
 class UserDetail extends Component {
   componentDidMount(){  
@@ -20,7 +21,7 @@ class UserDetail extends Component {
               return(
                 <div key={user.ID}>
                   <div>{user.name}</div>
-                  <button>Delete This User</button>
+                  <div onClick={()=>this.props.deleteUsers(user.ID)}><ButtonStyle text={{content:"Delete this user",color:"secondary"}}/></div>
                 </div>
               )
             })

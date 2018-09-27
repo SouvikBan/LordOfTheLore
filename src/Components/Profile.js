@@ -13,12 +13,19 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import { mainListItems } from './ListItems'
-import {Route,Switch} from 'react-router-dom' 
+import {Route,Switch,NavLink} from 'react-router-dom' 
 import GenreList from './GenreList'
 import Leaderboard from './Leaderboard'
 import UserDetail from './UserDetail'
 import QuizList from './QuizList'
 import QuestionList from './QuestionList'
+import ShowScore from './ShowScore'
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import {DeleteSessionData } from '../Actions/sessions.action'
+import { connect } from 'react-redux'
 
 const drawerWidth = 240;
 
@@ -144,6 +151,14 @@ class Dashboard extends React.Component {
             </div>
             <Divider />
             <List>{mainListItems}</List>
+            <NavLink to="/" onClick={()=>this.props.ClearSession()}>
+            <ListItem button>
+              <ListItemIcon>
+                <PowerSettingsNewIcon />
+              </ListItemIcon>
+              <ListItemText primary="Log Out" />
+            </ListItem>
+            </NavLink>
             <Divider />
           </Drawer>
           <main className={classes.content}>
@@ -153,7 +168,8 @@ class Dashboard extends React.Component {
             <Route  exact path="/Profile/Leaderboards" component={Leaderboard}/>
             <Route  exact path="/Profile/Genres" component={GenreList}/>
             <Route  exact path="/Profile/Genres/:genrename" component={QuizList} />
-            <Route  exact path="/Profile/Genres/:genrename/:quizname" component={QuestionList} />
+            <Route  exact path="/Profile/Genres/:genrename/:id" component={QuestionList} />
+            <Route  exact path="/Profile/Genres/:genrename/:id/score" component={ShowScore} />
            </Switch> 
         </main>
         </div>
@@ -166,4 +182,10 @@ Dashboard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Dashboard);
+const mapDispatchToProps = dispatch =>{
+  return{
+      ClearSession : ()=> dispatch(DeleteSessionData())
+  }
+}   
+
+export default connect(null,mapDispatchToProps)(withStyles(styles)(Dashboard))

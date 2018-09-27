@@ -15,7 +15,7 @@ class QuizList extends Component {
                 {
                     quizzes.map(quiz => 
                         <div className="Quizzes" key={quiz.ID}>
-                            <Link to={`${match.url}/${quiz.quizname}`} onClick={()=>this.props.submitQuizID(quiz.ID)}>
+                            <Link to={`${match.url}/${quiz.ID}`} onClick={()=>this.props.submitQuizID(quiz.ID)}>
                                 <Papersheet text={{content:quiz.quizname}} />
                             </Link>
                         </div>    

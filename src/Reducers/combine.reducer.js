@@ -5,13 +5,15 @@ import QuizzesReducer from './quizzes.reducer'
 import QuestionReducer from './questions.reducer'
 import UsersReducer from './users.reducer'
 import SessionsReducer from './session.reducer' 
+import ScoreReducer from './score.reducer'
 
 const rootReducer = combineReducers({
     Genres : GenresReducer,
     Quizzes: QuizzesReducer,
     Questions : QuestionReducer,
     Users: UsersReducer,
-    Sessions:SessionsReducer
+    Sessions:SessionsReducer,
+    Score:ScoreReducer
 });
 
 export default rootReducer

@@ -4,7 +4,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import PeopleIcon from '@material-ui/icons/People'
 import SendIcon from '@material-ui/icons/Send'
-import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import PersonIcon from '@material-ui/icons/Person'
 import {NavLink} from 'react-router-dom'
 
@@ -32,14 +31,6 @@ export const mainListItems = (
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Leaderboard" />
-    </ListItem>
-    </NavLink>
-    <NavLink to="/">
-    <ListItem button>
-      <ListItemIcon>
-        <PowerSettingsNewIcon />
-      </ListItemIcon>
-      <ListItemText primary="Log Out" />
     </ListItem>
     </NavLink>
   </div>

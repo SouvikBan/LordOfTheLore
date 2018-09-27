@@ -8,7 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 import LockIcon from '@material-ui/icons/LockOutlined'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import {getuserdetails,createuser} from '../Actions/users.action'
+import {createuser} from '../Actions/users.action'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import { ChangeSessionData } from '../Actions/sessions.action'
@@ -49,9 +49,6 @@ class Register extends Component{
     this.setState({email:event.target.value})
   }
 
-  componentDidMount(){
-    this.props.GetUsers()
-  }
 
   render(){
     const styles = theme => (
@@ -146,7 +143,6 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
   return {
-    GetUsers: () => dispatch(getuserdetails()),
     CreateUsers: payload => dispatch(createuser(payload)),
     submitSessionsData: payload => dispatch(ChangeSessionData(payload))
   }
