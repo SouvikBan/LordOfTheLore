@@ -19,7 +19,6 @@ export function addquestion(data,id){
 
     return dispatch => {
         request.then(({data}) => {
-            dispatch(fetchquestions(id))
         });
     };
 }
@@ -28,7 +27,6 @@ export function deletequestion(ID,id){
     const request = API.delete("/questions/"+ID)
     return dispatch => {
         request.then(({data}) =>{
-            dispatch(fetchquestions(id))
         });
     }
 

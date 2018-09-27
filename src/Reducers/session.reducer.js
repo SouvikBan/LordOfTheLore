@@ -1,4 +1,5 @@
 export default function(state={
+    "ID":null,
     "name":" ",
     "email":" ",
     "password":" ",
@@ -7,6 +8,7 @@ export default function(state={
 },action){
     switch(action.type){
         case "USER_LOGGED_IN":
+            state.ID=action.payload.ID
             state.name=action.payload.name
             state.email=action.payload.email
             state.password=action.payload.password

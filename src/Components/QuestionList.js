@@ -5,6 +5,7 @@ import axios from 'axios'
 import {showscore} from '../Actions/quizzes.action'
 import { Redirect } from 'react-router-dom'
 import {addquestion,deletequestion} from '../Actions/questions.action'
+import {} from '../Actions/scores.action'
 
 class QuestionList extends Component {
     constructor(){
@@ -39,7 +40,7 @@ class QuestionList extends Component {
     }
     handleSubmit(event){
         event.preventDefault()
-        var id=this.props.match.params.id
+        var id=parseInt(this.props.match.params.id,10)
         this.props.AddQuestion({"QuizID":id,"qtype":this.state.qtype,"question":this.state.question,"options":this.state.options,"answer":this.state.answer},this.props.match.params.id)
         console.log({"QuizID":id,"qtype":this.state.qtype,"question":this.state.question,"options":this.state.options,"answer":this.state.answer})
     }
@@ -113,12 +114,12 @@ class QuestionList extends Component {
             )
         }
     }
-    adminButtonsRender(bool){
+    adminButtonsRender(bool,question){
         if(bool){
             return(
                 <div>
                     <div><ButtonStyle text={{content:"Edit Question",color:"secondary"}}/></div>
-                    <div><ButtonStyle text={{content:"Delete Question",color:"secondary"}}/></div>
+                    <div onClick={()=>{this.props.DeleteQuestion(question.ID,this.props.match.params.id);this.forceUpdate()}}><ButtonStyle text={{content:"Delete Question",color:"secondary"}}/></div>
                 </div>
             )
         }
@@ -196,11 +197,11 @@ renderform(){
             <div className="QuestionList">
             {this.Createbuttonrender(this.props.Sessions.admin)}
             {this.renderform(this.state.form)}
-            {questions.map( question => 
+            {questions.map( (question,i) => 
                     <div className="Questions" key={question.ID}>
-                        <h4>{question.ID}.{question.question}</h4>
+                        <h4>{i+1}.{question.question}</h4>
                         {buttonrenderer(question)}
-                        {this.adminButtonsRender(this.props.Sessions.admin)} 
+                        {this.adminButtonsRender(this.props.Sessions.admin,question)} 
                     </div>
                 )
             } 
@@ -222,7 +223,8 @@ const mapDispatchToProps = dispatch =>{
     return{
         ShowScore : payload => dispatch(showscore(payload)),
         AddQuestion : payload => dispatch(addquestion(payload)),
-        DeleteQuestion : payload => dispatch(deletequestion(payload))
+        DeleteQuestion : payload => dispatch(deletequestion(payload)),
+        AddScore : payload => dispatch()
     }
 }   
 
